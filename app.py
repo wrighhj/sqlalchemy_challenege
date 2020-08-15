@@ -104,13 +104,6 @@ def stations():
 # Create Temperatures Route
 #################################################
 
-# # Combine datasets
-# #########################
-# session = Session(engine)
-
-# # sel = [Measurement.id, Measurement.station, Station.name, Measurement.date, Measurement.prcp, Measurement.tobs]
-# # combined = session.query(*sel).filter(Measurement.id == Station.id).all()
-
 @app.route("/api/v1.0/temp")
 def temp():
     # create session link
@@ -130,7 +123,6 @@ def temp():
                   order_by(func.count(Measurement.station).desc()).first()
 #     print("**** " + str(type(most_active))) debugging
 
-    #query_date  is "2016-08-23" for the last year query
     results = session.query(Measurement.date,\
                             Measurement.tobs).\
                             filter(Measurement.date >= year_ago).\
